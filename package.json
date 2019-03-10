@@ -2,16 +2,21 @@
   "name": "rnw-app",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
-  },
+  "main": "./node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start-web": "react-scripts start",
+    "build-web": "react-scripts build",
+    "test-web": "react-scripts test --env=jsdom",
+    "eject-web": "react-scripts eject",
+    "start-native": "expo start",
+    "eject-native": "expo eject",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "test-native": "node node_modules/jest/bin/jest.js --watch",
+    "test": "npm run test-web && npm run test-native"
+  },
+  "jest": {
+    "preset": "jest-expo"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -21,5 +26,22 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "dependencies": {
+    "expo": "^32.0.6",
+    "react": "^16.8.4",
+    "react-art": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-native": "0.57",
+    "react-native-web": "^0.10.1",
+    "react-scripts": "2.1.8"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "@babel/plugin-transform-react-jsx-source": "^7.2.0",
+    "babel-preset-expo": "^5.0.0",
+    "flow-bin": "^0.94.0",
+    "jest-expo": "^32.0.0",
+    "react-test-renderer": "^16.8.4"
+  }
 }

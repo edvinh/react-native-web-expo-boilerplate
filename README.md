@@ -1,68 +1,133 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) & Expo.
 
-## Available Scripts
+## Starting the app
 
-In the project directory, you can run:
+#### Web
 
-### `npm start`
+```bash
+  yarn start-web
+```
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Native
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+```bash
+  yarn start-native
+```
 
-### `npm test`
+**_Alternatively_**
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Android**
 
-### `npm run build`
+```bash
+  yarn android
+```
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**iOS**
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+```bash
+  yarn ios
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#
 
-### `npm run eject`
+## How this was set up:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+npx create-react-app rnw-app
+cd rnw-app
+yarn add -D @babel/plugin-proposal-object-rest-spread @babel/transform-react-jsx-source
+yarn add react-native@0.57 react-native-web expo@32.0.6 react-art react-test-renderer expo-cli
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Note:** React-native, react-native-web, and expo versions must be compatible with eachother. At the time of writing, react-native-web technically only supports up to rn@0.55, however it seems to work with rn@0.57.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Add a .babelrc
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```json
+{
+  "presets": ["babel-preset-expo"],
+  "env": {
+    "development": {
+      "plugins": ["@babel/plugin-proposal-object-rest-spread", "@babel/transform-react-jsx-source"]
+    }
+  }
+}
+```
 
-## Learn More
+### Add .watchmanconfig
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```json
+{}
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Modify package.json
 
-### Code Splitting
+```json
+...
+"main": "./node_modules/expo/AppEntry.js",
+"scripts": {
+    "start-web": "react-scripts start",
+    "build-web": "react-scripts build",
+    "test-web": "react-scripts test --env=jsdom",
+    "eject-web": "react-scripts eject",
+    "start-native": "expo start",
+    "eject-native": "expo eject",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "test-native": "node node_modules/jest/bin/jest.js --watch",
+    "test": "npm run test-web && npm run test-native"
+  },
+  "jest": {
+    "preset": "jest-expo"
+  }
+  ...
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### Add ./app.json
 
-### Analyzing the Bundle Size
+```json
+{
+  "expo": {
+    "sdkVersion": "32.0.0"
+  }
+}
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### Modify App.test.js
 
-### Making a Progressive Web App
+```jsx
+import React from 'react'
+import App from './App'
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+import renderer from 'react-test-renderer'
 
-### Advanced Configuration
+it('renders without crashing', () => {
+  const rendered = renderer.create(<App />).toJSON()
+  expect(rendered).toBeTruthy()
+})
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+### Add entrypoint to App in root folder
 
-### Deployment
+#### ./App.js
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+```jsx
+import React from 'react'
+import App from './src/App'
 
-### `npm run build` fails to minify
+export default class NativeApp extends React.Component {
+  render() {
+    return <App />
+  }
+}
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Modify index.css for consistent styling on Mobile and Native
+
+```css
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+```

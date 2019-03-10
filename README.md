@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) & Expo.
 
+**Disclaimer:** WIP. There might be things not working as intended.
+
 ## Starting the app
 
 #### Web

@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { Button, Icon } from 'react-native-elements'
 
 export default class App extends Component {
   render() {
     return (
       <View style={styles.app}>
         <View style={styles.appHeader}>
-          <Text style={styles.appTitle}>Welcome to React ⚛️</Text>
+          <Text style={styles.appTitle}>Welcome to React️</Text>
+          <Button title="Label" />
+          <Icon name="ios-alarm" type="ionicon" color="white" />
         </View>
         <Text style={styles.appIntro}>Hello World!</Text>
       </View>

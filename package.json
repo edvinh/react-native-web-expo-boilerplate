@@ -4,16 +4,16 @@
   "private": true,
   "main": "./node_modules/expo/AppEntry.js",
   "scripts": {
-    "start-web": "react-scripts start",
-    "build-web": "react-scripts build",
-    "test-web": "react-scripts test --env=jsdom",
-    "eject-web": "react-scripts eject",
-    "start-native": "expo start",
-    "eject-native": "expo eject",
+    "start:web": "react-app-rewired start",
+    "build:web": "react-app-rewired build",
+    "test:web": "react-app-rewired test --env=jsdom",
+    "eject:web": "react-scripts eject",
+    "start:native": "expo start",
+    "eject:native": "expo eject",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "test-native": "node node_modules/jest/bin/jest.js --watch",
-    "test": "npm run test-web && npm run test-native"
+    "test:native": "node node_modules/jest/bin/jest.js --watch",
+    "test": "npm run test:web && npm run test:native"
   },
   "jest": {
     "preset": "jest-expo"
@@ -28,12 +28,16 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "customize-cra": "^0.2.12",
     "expo": "^32.0.6",
     "react": "^16.8.4",
+    "react-app-rewired": "^2.1.1",
     "react-art": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-native": "0.57",
-    "react-native-web": "^0.10.1",
+    "react-native-elements": "^1.1.0",
+    "react-native-vector-icons": "^6.4.2",
+    "react-native-web": "^0.11.1",
     "react-scripts": "2.1.8"
   },
   "devDependencies": {

@@ -9,7 +9,7 @@ export default class App extends Component {
         <View style={styles.appHeader}>
           <Text style={styles.appTitle}>Welcome to React️</Text>
           <Button title="Label" />
-          <Icon name="ios-alarm" type="ionicon" color="white" />
+          <Icon name="ios-menu" type="ionicon" color="white" />
         </View>
         <Text style={styles.appIntro}>Hello World!</Text>
       </View>
